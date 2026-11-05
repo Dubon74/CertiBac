@@ -1,0 +1,66 @@
+@model IReadOnlyList<PosicionTablero>
+@{
+    ViewData["Title"] = "Tablero de posiciones";
+    var yo = User.Identity?.Name;
+}
+
+@functions {
+    static string Medalla(int posicion) => posicion switch
+    {
+        1 => "1ro",
+        2 => "2do",
+        3 => "3ro",
+        _ => posicion.ToString()
+    };
+}
+
+<h1 class="h3 text-center mb-1">Tablero de posiciones</h1>
+<p class="text-center text-muted mb-4">Top 10 por puntos acumulados en partidas finalizadas.</p>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-info text-center">Aún no hay partidas finalizadas. ¡Sé el primero en el tablero!</div>
+}
+else
+{
+    <div class="card shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="text-center" style="width: 80px;">#</th>
+                        <th scope="col">Jugador</th>
+                        <th scope="col" class="text-center">Partidas</th>
+                        <th scope="col" class="text-center">Puntos</th>
+                        <th scope="col" style="min-width: 160px;">Efectividad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var fila in Model)
+                    {
+                        <tr class="@(string.Equals(fila.NombreUsuario, yo, StringComparison.OrdinalIgnoreCase) ? "table-warning" : "")">
+                            <td class="text-center fs-5">@Medalla(fila.Posicion)</td>
+                            <td>
+                                @fila.NombreUsuario
+                                @if (string.Equals(fila.NombreUsuario, yo, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    <span class="badge text-bg-secondary ms-1">Tú</span>
+                                }
+                            </td>
+                            <td class="text-center">@fila.PartidasJugadas</td>
+                            <td class="text-center fw-semibold">@fila.PuntajeTotal</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" style="height: 8px;" role="progressbar" aria-label="Efectividad">
+                                        <div class="progress-bar" style="width: @(fila.Efectividad)%"></div>
+                                    </div>
+                                    <span class="small text-muted">@(fila.Efectividad)%</span>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
