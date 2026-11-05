@@ -1,0 +1,72 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Iniciar sesión";
+}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-7 col-lg-5 col-xl-4">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="h4 text-center mb-4">Iniciar sesión</h1>
+
+                @if (TempData["Exito"] is string exito)
+                {
+                    <div class="alert alert-success py-2">@exito</div>
+                }
+
+                <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="needs-validation" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario" class="form-label"></label>
+                        <input asp-for="Usuario" class="form-control" autocomplete="username" autofocus />
+                        <span asp-validation-for="Usuario" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Password" class="form-label"></label>
+
+                        <div class="input-group"> 
+                        <input asp-for="Password" id="password" class="form-control" autocomplete="current-password" />
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword"> Ver </button>
+                        </div>
+
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-bac w-100">Entrar</button>
+                </form>
+
+                <p class="text-center mt-3 mb-0 small">
+                    ¿No tienes cuenta? <a asp-action="Register">Regístrate</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/account.js" asp-append-version="true"></script>
+   
+    <script src="~/js/account.js" asp-append-version="true"></script>
+
+    <script>
+        document.getElementById('togglePassword')
+            .addEventListener('click', function () {
+
+                const password = document.getElementById('password');
+
+                if (password.type === 'password') 
+                {
+                    password.type = 'text';
+                    this.innerHTML = 'Ocultar';
+                } 
+                else 
+                {
+                    password.type = 'password';
+                    this.innerHTML = 'Ver';
+                }
+            });
+    </script>
+}
+
