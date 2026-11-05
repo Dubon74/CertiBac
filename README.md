@@ -159,24 +159,113 @@ Antes de ejecutar el proyecto asegúrate de tener instalado:
 
 # Instalación y Ejecución
 
-## 1️ Crear la Base de Datos
+## 1️ Restaurar Base de Datos
 
-Abrir y ejecutar:
+El proyecto incluye un respaldo de SQL Server:
 
-```sql
-database/01_TriviaBAC.sql
+```text
+database/PruebaTecnica.bak
 ```
 
-Opcionalmente ejecutar:
+Para restaurarlo:
 
-```sql
-database/02_Verificacion.sql
+1. Abrir SQL Server Management Studio (SSMS).
+2. Conectarse a la instancia de SQL Server.
+3. Clic derecho en **Bases de datos** → **Restaurar base de datos...**
+4. Seleccionar **Dispositivo**.
+5. Agregar el archivo:
+
+```text
+PruebaTecnica.bak
 ```
 
-También puede ejecutarse mediante línea de comandos:
+6. Confirmar la restauración.
+7. Verificar que la base de datos **PruebaTecnica** haya sido creada correctamente.
+
+---
+
+## 2️ Configurar la Cadena de Conexión
+
+Archivo:
+
+```json
+src/PruebaTecnica/appsettings.json
+```
+
+Autenticación Windows:
+
+```json
+{
+  "ConnectionStrings": {
+    "TriviaBAC": "Server=localhost;Database=TriviaBAC;Trusted_Connection=True;TrustServerCertificate=True;"
+  }
+}
+```
+
+Autenticación SQL:
+
+```json
+{
+  "ConnectionStrings": {
+    "TriviaBAC": "Server=localhost;Database=TriviaBAC;User Id=sa;Password=TuPassword;TrustServerCertificate=True;"
+  }
+}
+```
+
+---
+
+## 3️ Ejecutar la Aplicación
 
 ```bash
-sqlcmd -S localhost -E -I -f 65001 -i database/01_TriviaBAC.sql
+cd src/PruebaTecnica
+
+dotnet run
+```
+
+Abrir:
+
+```text
+http://localhost:5080
+```
+
+Crear una cuenta y comenzar a jugar.
+
+---
+
+
+---
+
+# Flujo de una Partida
+
+### 1. Inicio de Partida
+
+El procedimiento almacenado:
+
+```sql
+usp_IniciarPartida
+```
+
+- Crea una nueva partida.
+- Selecciona 3 preguntas aleatorias.
+- Guarda las preguntas asignadas.
+- No devuelve la respuesta correcta al cliente.
+
+### 2. Respuesta del Usuario
+
+El cliente envía:
+
+```json
+{
+  "partidaId": 1,
+  "preguntaId": 5,
+  "respuestaId": 12
+}
+```
+
+El procedimiento:
+
+```sql
+usp_ResponderPregunta
 ```
 
 ---
@@ -229,8 +318,6 @@ Crear una cuenta y comenzar a jugar.
 
 ---
 
-
----
 
 # Flujo de una Partida
 
