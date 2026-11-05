@@ -56,19 +56,35 @@ Sistema de preguntas y respuestas desarrollado en **C# / ASP.NET Core MVC (.NET 
 
 # Arquitectura
 
-```text
-Navegador (Razor + Bootstrap + jQuery/AJAX)
-        │
-Controllers
-        │
-Services
-        │
-Repositories (ADO.NET)
-        │
-SqlStoredProcedureRunner
-        ▼
-SQL Server (Stored Procedures)
-```
+## Capa de Presentación
+
+- Razor Views
+- Bootstrap 5
+- jQuery
+- AJAX
+
+## Capa de Controladores
+
+- AccountController
+- HomeController
+- TriviaController
+
+## Capa de Servicios
+
+- AuthService
+- TriviaService
+- Pbkdf2PasswordHasher
+
+## Capa de Acceso a Datos
+
+- UsuarioRepository
+- TriviaRepository
+- SqlStoredProcedureRunner
+  
+## Base de Datos
+
+- SQL Server
+- Procedimientos almacenados
 
 ## Componentes Principales
 
