@@ -54,17 +54,6 @@ Sistema de preguntas y respuestas desarrollado en **C# / ASP.NET Core MVC (.NET 
 
 ---
 
-## Calidad y Pruebas
-
-- Pruebas unitarias con xUnit.
-- Scripts de verificación de datos.
-- Validación a nivel de:
-  - Cliente (JavaScript)
-  - Servidor (ASP.NET Core)
-  - Base de datos (SQL Server)
-
----
-
 # Arquitectura
 
 ```text
