@@ -1,7 +1,7 @@
 
 # CertiBAC
 
-Sistema de preguntas y respuestas desarrollado en **C# / ASP.NET Core MVC (.NET 8)** con **SQL Server**. La aplicación implementa una arquitectura cliente-servidor donde todas las operaciones de base de datos se realizan exclusivamente mediante **procedimientos almacenados**, cumpliendo los requisitos de la prueba técnica.
+Sistema de preguntas y respuestas desarrollado en **C# / ASP.NET Core MVC (.NET 8)** con **SQL Server**. La aplicación implementa una arquitectura cliente-servidor donde todas las operaciones de base de datos se realizan exclusivamente mediante **procedimientos almacenados**
 
 ---
  # Link del Sitio web 
