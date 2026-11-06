@@ -337,17 +337,3 @@ Categorias
 Preguntas
 ```
 ---
-
-
-# Características Destacadas
-
-- Arquitectura cliente-servidor moderna.
-- SQL Server con acceso exclusivo mediante procedimientos almacenados.
-- Calificación segura realizada únicamente en el servidor.
-- Contraseñas protegidas con PBKDF2.
-- AJAX para una experiencia fluida sin recargas de página.
-- Bootstrap 5 para diseño responsive.
-- Ranking de jugadores integrado.
-- Pruebas unitarias para garantizar calidad y mantenimiento.
-
----
